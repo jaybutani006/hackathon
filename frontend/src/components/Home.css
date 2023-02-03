@@ -1,0 +1,71 @@
+body {
+    margin: 0px;
+    padding: 0px;
+}
+
+.content {
+    margin: 4px 94px;
+    font-size: 20px;
+}
+
+.nav-item {
+    margin: 4px 10px;
+}
+
+.navbar-brand {
+    margin: 4px 77px;
+    font-size: 24px;
+    font-weight: bolder;
+}
+
+.menu {
+    display: flex;
+    height: 500px;
+    width: 100%;
+}
+
+.food {
+    width: 60%;
+}
+
+.nutr {
+    width: 40%;
+}
+
+.blue {
+    background-color: lightblue;
+}
+
+.size {
+    margin: 1px -5px;
+    padding: 5px;
+    text-align: center;
+}
+
+.sizef {
+    margin: 1px -9px 1px -8px;
+    padding: 5px;
+    text-align: center;
+}
+
+.food h2 {
+    margin: 45px 73px 14px 200px;
+}
+
+.nutr h2 {
+    margin: 45px 73px 14px 200px;
+}
+
+.bor {
+    border: 2px solid black;
+    border-radius: 10px;
+}
+
+.attend {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.jay {
+    margin-left: 1rem;
+}
