@@ -9,6 +9,10 @@ body {
     box-sizing: border-box;
 }
 
+.main {
+    min-height: 100vh;
+}
+
 h5 {
     margin: 0px;
     font-size: 1.4em;

@@ -2,7 +2,7 @@ import React, { Fragment, useState, useEffect } from "react";
 import { clearErrors, login } from "../actions/userAction";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-
+import Header from "./Header";
 import "./login.css";
 
 function Login() {
@@ -28,6 +28,8 @@ function Login() {
       // eslint-disable-next-line
     }, [dispatch, error, alert, isAuthenticated]);
   return (
+    <>
+    {/* <Header/> */}
     <div className="wrapper">
       <form className="login" onSubmit={loginSubmit}>
         <p className="title">Log in</p>
@@ -63,7 +65,8 @@ function Login() {
           HungKiller.org
         </a>
       </footer>
-    </div>
+      </div>
+      </>
   );
 }
 

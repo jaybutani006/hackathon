@@ -20,16 +20,11 @@ function Login() {
       
     };
     useEffect(() => {
-      if (error) {
-        alert.error(error);
-        dispatch(clearErrors());
-      }
-
       if (isAuthenticated) {
         navigate("/home");
       }
       // eslint-disable-next-line
-    }, [dispatch, error, alert, isAuthenticated]);
+    }, [dispatch, isAuthenticated]);
   return (
     <div className="wrapper">
       <form className="login" onSubmit={signUpSubmit}>

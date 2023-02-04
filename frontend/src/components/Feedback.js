@@ -3,6 +3,7 @@ import { Rating } from "@material-ui/lab";
 import './Feedback.css'
 import { createFeedback } from '../actions/userAction';
 import { useDispatch } from "react-redux";
+import Header from './Header';
 
 function Feedback() {
     const dispatch = useDispatch();
@@ -24,7 +25,9 @@ function Feedback() {
     setRating(0);
   };
     
-    return (
+  return (
+    <>
+      <Header />
       <div class="container">
         <form action="" onSubmit={feebackSubmit}>
           <p>
@@ -50,17 +53,13 @@ function Feedback() {
             value={rating}
             size="large"
           />
-          {/* <div class="botton">
-            <button type="button" class="btn btn-primary">
-              Submit
-            </button>
-          </div> */}
-          <button type="submit" class="btn btn-primary">
+          <button type="submit" class="botton btn btn-primary">
             Submit
           </button>
         </form>
       </div>
-    );
+    </>
+  );
 }
 
 export default Feedback

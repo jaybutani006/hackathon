@@ -1,0 +1,25 @@
+ .container {
+     display: flex;
+     justify-content: center;
+     align-items: center;
+     flex-direction: column;
+     height: 100vh;
+ }
+ 
+ textarea {
+     border-radius: 7px;
+     padding: 5px;
+ }
+ 
+ .sub {
+     padding: 0px 90px;
+ }
+ 
+ #bor {
+     border: 2px solid black;
+     border-radius: 10px;
+ }
+ 
+ th {
+     text-align: center;
+ }

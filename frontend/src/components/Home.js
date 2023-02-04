@@ -1,8 +1,10 @@
 import React from 'react'
+import Header from './Header'
 import './Home.css'
 function Home() {
   return (
     <>
+      <Header />
     <div class="menu">
         <div class="food">
             <h2>Today's Menu</h2>

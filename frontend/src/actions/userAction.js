@@ -16,6 +16,9 @@ import {
     GET_FEEDBACK_REQUEST,
     GET_FEEDBACK_SUCCESS,
     GET_FEEDBACK_FAIL,
+    CREATE_MENU_REQUEST,
+    CREATE_MENU_SUCCESS,
+    CREATE_MENU_FAIL,
     CLEAR_ERRORS,
 } from "../constants/userConstants";
 import axios from "axios";
@@ -69,10 +72,47 @@ export const createFeedback = (comment, ratings) => async(dispatch) => {
             `/api/v1/createfeedback`, { comment, ratings },
             config
         );
-        dispatch({ type: CREATE_FEEDBACK_SUCCESS, payload: data.user });
+        dispatch({ type: CREATE_FEEDBACK_SUCCESS, payload: data.feedback });
     } catch (error) {
         dispatch({
             type: CREATE_FEEDBACK_FAIL,
+            payload: error.response.data.error,
+        });
+    }
+};
+
+// create feedback
+export const createMenu = (breakfast, lunch, snacks, dinner, id) => async(dispatch) => {
+    try {
+        dispatch({ type: CREATE_MENU_REQUEST });
+
+        const config = { headers: { "Content-Type": "multipart/form-data" } };
+
+        const { data } = await axios.put(
+            `/api/v1/admin/createMenu`, { breakfast, lunch, snacks, dinner, id },
+            config
+        );
+        dispatch({ type: CREATE_MENU_SUCCESS, payload: data.menu });
+    } catch (error) {
+        dispatch({
+            type: CREATE_MENU_FAIL,
+            payload: error.response.data.error,
+        });
+    }
+};
+
+// create feedback
+export const getAllFeedbacks = () => async(dispatch) => {
+    try {
+        dispatch({ type: GET_FEEDBACK_REQUEST });
+
+        const { data } = await axios.get(
+            `/api/v1/getfeedbacks`
+        );
+        dispatch({ type: GET_FEEDBACK_SUCCESS, payload: data.feedbacks });
+    } catch (error) {
+        dispatch({
+            type: GET_FEEDBACK_FAIL,
             payload: error.response.data.error,
         });
     }

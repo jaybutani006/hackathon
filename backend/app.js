@@ -22,9 +22,11 @@ app.use(fileUpload());
 
 const user = require("./routes/userRoute");
 const feedBack = require("./routes/feedbackRoute");
+const Menu = require("./routes/MenuRoutes");
 
 app.use("/api/v1", user);
 app.use("/api/v1", feedBack);
+app.use("/api/v1", Menu);
 
 // middleware for errors
 app.use(errorMiddleware);

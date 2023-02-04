@@ -16,6 +16,9 @@ import {
     GET_FEEDBACK_REQUEST,
     GET_FEEDBACK_SUCCESS,
     GET_FEEDBACK_FAIL,
+    CREATE_MENU_REQUEST,
+    CREATE_MENU_SUCCESS,
+    CREATE_MENU_FAIL,
     CLEAR_ERRORS,
 } from "../constants/userConstants";
 
@@ -101,6 +104,38 @@ export const feedbackReducer = (state = { feedback: {} }, action) => {
                 ...state,
                 loading: false,
                 feedback: null,
+                error: action.payload,
+            };
+
+        case CLEAR_ERRORS:
+            return {
+                ...state,
+                error: null,
+            };
+
+        default:
+            return state;
+    }
+};
+
+export const menuReducer = (state = { menu: {} }, action) => {
+    switch (action.type) {
+        case CREATE_MENU_REQUEST:
+            return {
+                loading: true,
+            };
+        case CREATE_MENU_SUCCESS:
+            return {
+                ...state,
+                loading: false,
+                isAuthenticated: true,
+                menu: action.payload,
+            };
+        case CREATE_MENU_FAIL:
+            return {
+                ...state,
+                loading: false,
+                menu: null,
                 error: action.payload,
             };
 

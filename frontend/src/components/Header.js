@@ -1,6 +1,12 @@
 import React from 'react'
-
+import { useDispatch } from 'react-redux';
+import { logout } from '../actions/userAction';
 function Header() {
+  const dispatch = useDispatch();
+
+  function logoutUser() {
+    dispatch(logout());
+  }
   return (
     <nav class="navbar navbar-expand-lg  navbar-dark bg-dark ">
       <div class="container-fluid">
@@ -30,6 +36,13 @@ function Header() {
               </a>
             </li>
           </ul>
+          <button
+            type="button"
+            class="btn btn-light logout"
+            onClick={logoutUser}
+          >
+            Logout
+          </button>
         </div>
       </div>
     </nav>
