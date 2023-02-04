@@ -1,5 +1,5 @@
 import "./App.css";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes, useNavigate } from "react-router-dom";
 import React, { useEffect } from "react";
 import Login from "./components/Login";
 import SignUp from "./components/SignUp";
@@ -15,14 +15,12 @@ import CreateMenu from "./components/CreateMenu";
 import ManageUsers from "./components/ManageUsers";
 import store from './store'
 import { loadUser } from "./actions/userAction";
+import NGO from "./components/NGO";
 function App() {
   const { isAuthenticated, user } = useSelector((state) => state.user);
   console.log(isAuthenticated)
   useEffect(() => {
-    const func = async () => {
       store.dispatch(loadUser());
-    };
-    func();
   }, []);
   const fun =async () => {
     let isAdmin = await user.role === 'admin';
@@ -47,9 +45,11 @@ function App() {
         {!isAuthenticated && <Route exact path="/points" element={<Login />} />}
         {isAuthenticated && <Route exact path="/about" element={<About />} />}
         {!isAuthenticated && <Route exact path="/about" element={<Login />} />}
-        {isAdmin && (
-          <Route exact path="/admin/feedback" element={<AdminFeedback />} />
-        )}
+        {
+          isAuthenticated && isAdmin && (
+            <Route exact path="/admin/feedback" element={<AdminFeedback />} />
+          )
+        }
         {(!isAdmin || !isAuthenticated) && (
           <Route exact path="/admin/feedback" element={<Login />} />
         )}
@@ -64,6 +64,12 @@ function App() {
         )}
         {(!isAdmin || !isAuthenticated) && (
           <Route exact path="/admin/manageusers" element={<Login />} />
+        )}
+        {isAdmin && (
+          <Route exact path="/ngo" element={<NGO />} />
+        )}
+        {(!isAdmin || !isAuthenticated) && (
+          <Route exact path="/ngo" element={<Login />} />
         )}
       </Routes>
       <Footer />

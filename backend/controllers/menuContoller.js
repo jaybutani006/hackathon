@@ -11,7 +11,7 @@ exports.createMenu = catchAsyncError(async(req, res, next) => {
         id, { breakfast: breakfast, lunch: lunch, snacks: snacks, dinner: dinner }, {
             new: true,
             runValidators: true,
-            useFindAndModify: false,
+            // useFindAndModify: false,
         }
     );
 

@@ -29,10 +29,8 @@ function Feedback() {
     <>
       <Header />
       <div className="container">
-        <form action="" onSubmit={feebackSubmit}>
-          <p>
-            <h3>Comments:</h3>
-          </p>
+        <form className='fr' action="" onSubmit={feebackSubmit}>
+          <p className="tx">Comments:</p>
           <textarea
             name="comment"
             id="comment"
@@ -43,9 +41,7 @@ function Feedback() {
             onChange={(e) => setComment(e.target.value)}
           ></textarea>
           <br />
-          <p>
-            <h3>Rating:</h3>
-          </p>
+          <p className="tx">Rating:</p>
           <Rating
             options={options}
             className="meetClass"

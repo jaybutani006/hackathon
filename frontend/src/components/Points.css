@@ -239,27 +239,6 @@ opacity:1;
     font-weight: bolder;
 }
 
-.menu {
-    display: flex;
-    height: 852px;
-}
-
-.food {
-    width: 60%;
-}
-
-.food h2 {
-    margin: 92px 307px;
-}
-
-.nutr {
-    width: 40%;
-}
-
-.nutr h2 {
-    margin: 120px 137px;
-}
-
 .blue {
     background-color: lightblue;
 }
