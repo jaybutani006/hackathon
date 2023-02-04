@@ -17,16 +17,11 @@ function Login() {
     };
      const { error, isAuthenticated } = useSelector((state) => state.user);
     useEffect(() => {
-      if (error) {
-        alert.error(error);
-        dispatch(clearErrors());
-      }
-
       if (isAuthenticated) {
-        navigate('/home');
+        navigate('/');
       }
       // eslint-disable-next-line
-    }, [dispatch, error, alert, isAuthenticated]);
+    }, [dispatch, isAuthenticated]);
   return (
     <>
     {/* <Header/> */}

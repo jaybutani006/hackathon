@@ -21,7 +21,7 @@ function Login() {
     };
     useEffect(() => {
       if (isAuthenticated) {
-        navigate("/home");
+        navigate("/");
       }
       // eslint-disable-next-line
     }, [dispatch, isAuthenticated]);

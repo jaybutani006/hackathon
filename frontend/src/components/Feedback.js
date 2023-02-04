@@ -28,7 +28,7 @@ function Feedback() {
   return (
     <>
       <Header />
-      <div class="container">
+      <div className="container">
         <form action="" onSubmit={feebackSubmit}>
           <p>
             <h3>Comments:</h3>
@@ -53,7 +53,7 @@ function Feedback() {
             value={rating}
             size="large"
           />
-          <button type="submit" class="botton btn btn-primary">
+          <button type="submit" className="botton btn btn-primary sub">
             Submit
           </button>
         </form>

@@ -13,17 +13,17 @@ import About from "./components/About";
 import AdminFeedback from "./components/AdminFeedback";
 import CreateMenu from "./components/CreateMenu";
 import ManageUsers from "./components/ManageUsers";
-// import store from './store'
+import store from './store'
 import { loadUser } from "./actions/userAction";
 function App() {
   const { isAuthenticated, user } = useSelector((state) => state.user);
   console.log(isAuthenticated)
-  // useEffect(() => {
-  //   const func = async () => {
-  //     store.dispatch(loadUser());
-  //   };
-  //   func();
-  // }, []);
+  useEffect(() => {
+    const func = async () => {
+      store.dispatch(loadUser());
+    };
+    func();
+  }, []);
   const fun =async () => {
     let isAdmin = await user.role === 'admin';
     return isAdmin;
@@ -34,8 +34,8 @@ function App() {
       <Routes>
         <Route exact path="/login" element={<Login />} />
         <Route exact path="/signup" element={<SignUp />} />
-        {isAuthenticated && <Route exact path="/home" element={<Home />} />}
-        {!isAuthenticated && <Route exact path="/home" element={<Login />} />}
+        {isAuthenticated && <Route exact path="/" element={<Home />} />}
+        {!isAuthenticated && <Route exact path="/" element={<Login />} />}
 
         {isAuthenticated && (
           <Route exact path="/feedback" element={<Feedback />} />

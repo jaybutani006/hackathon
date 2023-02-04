@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getAllFeedbacks } from '../actions/userAction';
 import FeedbackCard from './FeedbackCard';
 import './AdminFeedback.css'
+import AdminHeader from './AdminHeader';
 function AdminFeedback() {
     const dispatch = useDispatch();
     const { feedback } = useSelector(
@@ -10,23 +11,26 @@ function AdminFeedback() {
     );
   useEffect(() => {
     const fun = async () => {
-      dispatch(await getAllFeedbacks());
+      dispatch(getAllFeedbacks());
     }
     fun();
     }, []);
   return (
-    <div>
-      {feedback && feedback[0] ? (
-        <div className="reviews">
-          {feedback &&
-            feedback.map((feedback) => (
-              <FeedbackCard key={feedback._id} feedback={feedback} />
-            ))}
-        </div>
-      ) : (
-        <p className="noReviews">No Feedback Yet</p>
-      )}
-    </div>
+    <>
+      <AdminHeader />
+      <div>
+        {feedback && feedback[0] ? (
+          <div className="reviews">
+            {feedback &&
+              feedback.map((feedback) => (
+                <FeedbackCard key={feedback._id} feedback={feedback} />
+              ))}
+          </div>
+        ) : (
+          <p className="noReviews">No Feedback Yet</p>
+        )}
+      </div>
+    </>
   );
 }
 
