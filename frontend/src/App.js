@@ -16,6 +16,7 @@ import ManageUsers from "./components/ManageUsers";
 import store from './store'
 import { loadUser } from "./actions/userAction";
 import NGO from "./components/NGO";
+import Points2 from "./components/Points2";
 function App() {
   const { isAuthenticated, user } = useSelector((state) => state.user);
   console.log(isAuthenticated)
@@ -45,6 +46,7 @@ function App() {
         {!isAuthenticated && <Route exact path="/points" element={<Login />} />}
         {isAuthenticated && <Route exact path="/about" element={<About />} />}
         {!isAuthenticated && <Route exact path="/about" element={<Login />} />}
+        {<Route exact path="/point" element={<Points2 />} />}
         {
           isAuthenticated && isAdmin && (
             <Route exact path="/admin/feedback" element={<AdminFeedback />} />

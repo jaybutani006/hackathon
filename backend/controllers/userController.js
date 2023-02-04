@@ -61,3 +61,22 @@ exports.logout = catchAsyncError(async(req, res, next) => {
         message: "Logged Out"
     })
 })
+
+const accountSid = "AC9fa39578a042f6a684b182016fd67999";
+const authToken = "732af79756326ad810b3119a999c0fc7";
+const client = require("twilio")(accountSid, authToken);
+exports.calling = catchAsyncError(async(req, res) => {
+    //   const user = await User.findById(req.user.id);
+    // console.log("hi");
+    client.messages
+        .create({
+            body: "Thanks for your response. You got 2pts!",
+            from: "+19305291661",
+            to: "+917359536153",
+        })
+        .then((message) => console.log(message.sid));
+    console.log("hi");
+    res.status(200).json({
+        success: true,
+    });
+});

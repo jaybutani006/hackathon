@@ -6,13 +6,15 @@ import { composeWithDevTools } from "redux-devtools-extension";
 import {
     userReducer,
     feedbackReducer,
-    menuReducer
+    menuReducer,
+    callReducer
 } from "./reducers/userReducer";
 
 const reducer = combineReducers({
     user: userReducer,
     feedback: feedbackReducer,
     menu: menuReducer,
+    call: callReducer
 });
 
 let initialState = {};

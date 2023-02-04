@@ -27,9 +27,9 @@
         "nodemon": "^2.0.20",
         "overlay-navbar": "^1.2.3",
         "stripe": "^10.13.0",
+        "twilio": "^3.84.1",
         "validator": "^13.7.0",
         "vercel": "^28.4.14"
     },
-    "devDependencies": {},
     "description": ""
 }

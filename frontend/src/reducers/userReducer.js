@@ -19,6 +19,9 @@ import {
     CREATE_MENU_REQUEST,
     CREATE_MENU_SUCCESS,
     CREATE_MENU_FAIL,
+    CALLING_REQUEST,
+    CALLING_SUCCESS,
+    CALLING_FAIL,
     CLEAR_ERRORS,
 } from "../constants/userConstants";
 
@@ -139,6 +142,37 @@ export const menuReducer = (state = { menu: {} }, action) => {
                 error: action.payload,
             };
 
+        case CLEAR_ERRORS:
+            return {
+                ...state,
+                error: null,
+            };
+
+        default:
+            return state;
+    }
+};
+
+export const callReducer = (state = { call: {} }, action) => {
+    switch (action.type) {
+        case CALLING_REQUEST:
+            return {
+                loading: true,
+            };
+        case CALLING_SUCCESS:
+            return {
+                ...state,
+                loading: false,
+                call: action.payload,
+            };
+
+        case CALLING_FAIL:
+            return {
+                ...state,
+                loading: false,
+                call: null,
+                error: action.payload,
+            };
         case CLEAR_ERRORS:
             return {
                 ...state,

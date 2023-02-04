@@ -19,6 +19,9 @@ import {
     CREATE_MENU_REQUEST,
     CREATE_MENU_SUCCESS,
     CREATE_MENU_FAIL,
+    CALLING_REQUEST,
+    CALLING_SUCCESS,
+    CALLING_FAIL,
     CLEAR_ERRORS,
 } from "../constants/userConstants";
 import axios from "axios";
@@ -143,4 +146,18 @@ export const logout = () => async(dispatch) => {
 };
 export const clearErrors = () => async(dispatch) => {
     dispatch({ type: CLEAR_ERRORS });
+};
+
+export const callall = () => async(dispatch) => {
+    try {
+        dispatch({ type: CALLING_REQUEST });
+
+        const { data } = await axios.get(`/api/v1/calling`);
+        dispatch({ type: CALLING_SUCCESS, payload: data.success });
+    } catch (error) {
+        dispatch({
+            type: CALLING_FAIL,
+            payload: error.response.data.error,
+        });
+    }
 };

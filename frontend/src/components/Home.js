@@ -4,38 +4,25 @@ import './Home.css'
 import a from '../images/pizza.jfif';
 import b from '../images/cake.avif';
 import c from '../images/salad.avif';
+import { useDispatch } from "react-redux";
+import { callall } from "../actions/userAction";
 import d from '../images/noodels.avif';
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 import { Carousel } from 'react-responsive-carousel';
+import { useNavigate } from 'react-router-dom';
 function Home() {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const submitFunc = (e) => {
+    e.preventDefault();
+    dispatch(callall());
+    navigate("/point");
+
+  }
   return (
     <>
       <Header />
-      {/* <div class="im_color"> */}
-      {/* <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
-          <div class="carousel-inner im_size">
-            <div class="carousel-item active i_size">
-              <img src={a} class="d-block w-100" alt="..." />
-            </div>
-            <div class="carousel-item i_size">
-              <img src={b} class="d-block w-100" alt="..." />
-            </div>
-            <div class="carousel-item i_size">
-              <img src={c} class="d-block w-100" alt="..." />
-            </div>
-            <div class="carousel-item i_size">
-              <img src={d} class="d-block w-100" alt="..." />
-            </div>
-          </div>
-          <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Previous</span>
-          </button>
-          <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Next</span>
-          </button>
-        </div> */}
       <Carousel
         ssr={false}
         infiniteLoop
@@ -152,10 +139,10 @@ function Home() {
         <p>
           <h3>Are you going to eat today? </h3>{" "}
         </p>
-        <button type="button" class="btn btn-success jay ">
+        <button type="button" class="btn btn-success jay " onClick={submitFunc}>
           Yes
         </button>
-        <button type="button" class="btn btn-danger jay jay2">
+        <button type="button" class="btn btn-danger jay jay2" onClick={submitFunc}>
           No
         </button>
       </div>
