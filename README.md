@@ -13,6 +13,10 @@ We created this project using technologies like, HTML, CSS, JavaScript, Bootstra
 ## What we learned
 Up till now I have heard so many good things about Hackathons and that led me to participate in Hack This Fall 3.0. Thanks to Siddharth dayalwal sir this wonderful opportunity as given to the beginners. As this was our first hackathon, we learnt so many things like how to collaborate on a single project with each member having a different skillset. There were so many workshops related to the new learning and we also learned from each of them. We also learnt problem solving in a project as we run into so many problems and we also solved them wisely.
 
+## App's Look
+
+<img width="937" alt="image" src="https://user-images.githubusercontent.com/107234388/216783275-9d5f8446-cc10-4d5f-ab3a-76255cb8778e.png">
+
 
 <br>
 
@@ -40,6 +44,7 @@ It correctly bundles React in production mode and optimizes the build for the be
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
 
 <br>
 
