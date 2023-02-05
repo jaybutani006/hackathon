@@ -74,6 +74,10 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
  2nd way : step 1 : you can directly download the zip file of the project and go into the project using vs code.
            step 2 : repeat steps from 1st way from step 3.
 
+## Postman public workspace  
+link : https://www.postman.com/bold-star-511831/workspace/team-workspace/overview
+<br>
+You can use above link to get all the api details in public workspace.
 
 ### Future scopes 🔥 :
 -> creating android version and IOS version of the web app so it can be easily accessible to the users. <br>
