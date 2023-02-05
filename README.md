@@ -9,6 +9,8 @@ Reduce the food wastage and also helps NGO's.
 ## How we built it
 We created this project using technologies like, HTML, CSS, JavaScript, Bootstrap, ReactJS as for frontend. And ExpressJS, NodeJS as backend with MongoDB as a database. We used GitHub as a version control system and postman as a service for building and using API's.
 
+## USE OF TWILIO
+We used messaging service from twilio for sending messages to the user.
 
 ## What we learned
 Up till now I have heard so many good things about Hackathons and that led me to participate in Hack This Fall 3.0. Thanks to Siddharth dayalwal sir this wonderful opportunity as given to the beginners. As this was our first hackathon, we learnt so many things like how to collaborate on a single project with each member having a different skillset. There were so many workshops related to the new learning and we also learned from each of them. We also learnt problem solving in a project as we run into so many problems and we also solved them wisely.
@@ -18,6 +20,8 @@ Up till now I have heard so many good things about Hackathons and that led me to
 <img width="937" alt="image" src="https://user-images.githubusercontent.com/107234388/216783275-9d5f8446-cc10-4d5f-ab3a-76255cb8778e.png">
 
 <img width="923" alt="image" src="https://user-images.githubusercontent.com/107234388/216783812-eef586d9-75cf-4f66-9931-8c606a68af6e.png">
+
+<img width="923" alt="image"  src="https://user-images.githubusercontent.com/83772913/216793540-fcf12ca1-5c4b-4a5a-b879-b0a11875be50.png">
 
 
 <br>
