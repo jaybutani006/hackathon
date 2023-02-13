@@ -7,14 +7,18 @@ import {
     userReducer,
     feedbackReducer,
     menuReducer,
-    callReducer
+    callReducer,
+    usersReducer,
+    adminReducer
 } from "./reducers/userReducer";
 
 const reducer = combineReducers({
     user: userReducer,
     feedback: feedbackReducer,
     menu: menuReducer,
-    call: callReducer
+    call: callReducer,
+    users: usersReducer,
+    customers: adminReducer
 });
 
 let initialState = {};

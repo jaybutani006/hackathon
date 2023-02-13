@@ -41,3 +41,11 @@ textarea {
     margin-top: 1rem;
     margin-bottom: 1rem;
 }
+
+.feedbackSuccess {
+    min-height: 80vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: green;
+}

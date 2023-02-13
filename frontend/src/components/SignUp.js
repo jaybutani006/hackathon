@@ -1,5 +1,5 @@
 import React, { Fragment, useState, useEffect } from "react";
-
+import { useAlert } from "react-alert";
 import { clearErrors, register } from "../actions/userAction";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate} from "react-router-dom";
@@ -13,18 +13,24 @@ function Login() {
     const [email, setEmail] = useState("");
     const { error, loading , isAuthenticated} = useSelector(
         (state) => state.user
-    );
+  );
+    const alert = useAlert();
+  
   const signUpSubmit = (e) => {
       e.preventDefault();
     dispatch(register(rollNumber, email, password));
       
     };
-    useEffect(() => {
+  useEffect(() => {
+      if (error) {
+        alert.error(error);
+        dispatch(clearErrors());
+      }
       if (isAuthenticated) {
         navigate("/");
       }
       // eslint-disable-next-line
-    }, [dispatch, isAuthenticated]);
+    }, [dispatch, isAuthenticated, error, alert]);
   return (
     <div className="wrapper">
       <form className="login" onSubmit={signUpSubmit}>

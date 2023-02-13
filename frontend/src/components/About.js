@@ -4,10 +4,13 @@ import one from "../images/one.jfif"
 import two from "../images/two.jfif"
 import three from "../images/three.jfif"
 import Header from './Header'
+import { useSelector } from 'react-redux'
 function About() {
+  const { user } = useSelector((state) => state.user);
   return (
+
     <>
-      <Header />
+      <Header user={user}/>
       <div class="container1">
         <div class="card">
           <img src={one} class="card-img-top" alt="..." />

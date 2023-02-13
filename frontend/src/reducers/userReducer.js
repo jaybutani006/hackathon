@@ -22,6 +22,24 @@ import {
     CALLING_REQUEST,
     CALLING_SUCCESS,
     CALLING_FAIL,
+    UPDATE_POINTS_REQUEST,
+    UPDATE_POINTS_SUCCESS,
+    UPDATE_POINTS_FAIL,
+    GET_MENU_REQUEST,
+    GET_MENU_SUCCESS,
+    GET_MENU_FAIL,
+    FEEDBACK_COUNT_REQUEST,
+    FEEDBACK_COUNT_SUCCESS,
+    FEEDBACK_COUNT_FAIL,
+    ANSWER_COUNT_REQUEST,
+    ANSWER_COUNT_SUCCESS,
+    ANSWER_COUNT_FAIL,
+    GET_ALL_USERS_REQUEST,
+    GET_ALL_USERS_SUCCESS,
+    GET_ALL_USERS_FAIL,
+    UPDATE_CUSTOMER_REQUEST,
+    UPDATE_CUSTOMER_SUCCESS,
+    UPDATE_CUSTOMER_FAIL,
     CLEAR_ERRORS,
 } from "../constants/userConstants";
 
@@ -59,7 +77,29 @@ export const userReducer = (state = { user: {} }, action) => {
                 user: null,
                 error: action.payload,
             };
-
+        case UPDATE_POINTS_REQUEST:
+        case FEEDBACK_COUNT_REQUEST:
+        case ANSWER_COUNT_REQUEST:
+            return {
+                ...state,
+                loading: true,
+            };
+        case UPDATE_POINTS_SUCCESS:
+        case FEEDBACK_COUNT_SUCCESS:
+        case ANSWER_COUNT_SUCCESS:
+            return {
+                ...state,
+                loading: false,
+                user: action.payload,
+            };
+        case UPDATE_POINTS_FAIL:
+        case FEEDBACK_COUNT_FAIL:
+        case ANSWER_COUNT_FAIL:
+            return {
+                ...state,
+                loading: false,
+                error: action.payload,
+            };
         case LOAD_USER_FAIL:
             return {
                 loading: false,
@@ -124,21 +164,88 @@ export const feedbackReducer = (state = { feedback: {} }, action) => {
 export const menuReducer = (state = { menu: {} }, action) => {
     switch (action.type) {
         case CREATE_MENU_REQUEST:
+        case GET_MENU_REQUEST:
             return {
                 loading: true,
             };
         case CREATE_MENU_SUCCESS:
+        case GET_MENU_SUCCESS:
             return {
                 ...state,
                 loading: false,
-                isAuthenticated: true,
+                success: true,
                 menu: action.payload,
             };
         case CREATE_MENU_FAIL:
+        case GET_MENU_FAIL:
             return {
                 ...state,
                 loading: false,
                 menu: null,
+                error: action.payload,
+            };
+
+        case CLEAR_ERRORS:
+            return {
+                ...state,
+                error: null,
+            };
+
+        default:
+            return state;
+    }
+};
+
+export const usersReducer = (state = { users: {} }, action) => {
+    switch (action.type) {
+        case GET_ALL_USERS_REQUEST:
+            return {
+                loading: true,
+            };
+        case GET_ALL_USERS_SUCCESS:
+            return {
+                ...state,
+                loading: false,
+                success: true,
+                users: action.payload,
+            };
+        case GET_ALL_USERS_FAIL:
+            return {
+                ...state,
+                loading: false,
+                users: null,
+                error: action.payload,
+            };
+
+        case CLEAR_ERRORS:
+            return {
+                ...state,
+                error: null,
+            };
+
+        default:
+            return state;
+    }
+};
+
+export const adminReducer = (state = { customers: {} }, action) => {
+    switch (action.type) {
+        case UPDATE_CUSTOMER_REQUEST:
+            return {
+                loading: true,
+            };
+        case UPDATE_CUSTOMER_SUCCESS:
+            return {
+                ...state,
+                loading: false,
+                success: true,
+                customers: action.payload,
+            };
+        case UPDATE_CUSTOMER_FAIL:
+            return {
+                ...state,
+                loading: false,
+                customers: null,
                 error: action.payload,
             };
 

@@ -2,9 +2,10 @@ const dotenv = require('dotenv');
 const app = require("./app");
 const cloudinary = require('cloudinary');
 const connectDatabase = require("./config/database");
-
-
-// handling uncaught exeption
+const cron = require('node-cron');
+const moment = require('moment')
+const User = require('./models/userModel')
+    // handling uncaught exeption
 
 process.on("uncaughtException", (err) => {
     console.log(`Error ${err.message}`);
@@ -40,4 +41,14 @@ process.on("unhandledRejection", err => {
     server.close(() => {
         process.exit(1);
     })
+})
+
+// cron.schedule("*/3 * * * * *", () => {
+//     console.log("called every 5 second", moment().format('DD MMM YYYY hh:mm:ss'));
+// })
+cron.schedule("34 14 * * *", async() => {
+    await User.updateMany({}, { submitans: 0, submitFeedback: 0 });
+    console.log("Daily submit value reseted");
+}, {
+    timezone: 'Asia/Kolkata'
 })

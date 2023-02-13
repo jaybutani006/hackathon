@@ -1,14 +1,17 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { createMenu } from '../actions/userAction';
+import { clearErrors, createMenu } from '../actions/userAction';
 import AdminHeader from './AdminHeader';
 import './CreateMenu.css'
+import { useAlert } from "react-alert";
+
 function CreateMenu() {
+  const alert = useAlert();
     const dispatch = useDispatch();
   const navigate = useNavigate();
-  const menu = useSelector((state) => state.menu);
-    const id = menu._id;
+  const {menu , error, success} = useSelector((state) => state.menu);
+    const id = "63ddfa233a0ec14cb64d385e";
   // const id = f();
     const [breakfast, setBreakfast] = useState("");
     const [lunch, setLunch] = useState("");
@@ -16,10 +19,15 @@ function CreateMenu() {
     const [dinner, setDinner] = useState("");
     const createMenuSubmit = (e) => {
       e.preventDefault();
-      console.log(id);
-        dispatch(createMenu(breakfast, lunch, snacks, dinner , id));
-        navigate('/');
-    };
+      dispatch(createMenu(breakfast, lunch, snacks, dinner, id));
+      navigate('/');
+  };
+  useEffect(() => {
+    if (error) {
+      alert.error(error);
+      dispatch(clearErrors());
+    }
+  }, [dispatch, alert, error, success]);
   return (
     <>
       <AdminHeader />

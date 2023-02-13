@@ -1,17 +1,18 @@
 .menu {
     display: flex;
-    height: 500px;
+    height: auto;
     width: 100%;
 }
 
 .food {
     width: 55%;
     margin-left: 2rem;
-    margin-top: 32px;
+    margin-top: 2rem;
 }
 
 .nutr {
     width: 35%;
+    margin-top: 2rem;
 }
 
 .blue {
@@ -30,8 +31,9 @@
 }
 
 .food h2 {
-    margin: 45px 73px 14px 322px;
-    font-size: 28px;
+    color: red;
+    justify-content: center;
+    display: flex;
     font-weight: bolder;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     color: red;
@@ -39,8 +41,8 @@
 }
 
 .nutr h2 {
-    margin: 45px 73px 14px 200px;
-    font-size: 28px;
+    display: flex;
+    justify-content: center;
     font-weight: bolder;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     color: red;
@@ -53,15 +55,9 @@
     text-align: center;
 }
 
-.food h2 {
-    margin-top: 25px;
-    margin-bottom: 0px;
-    justify-content: center;
-    display: flex;
-}
-
 .attend {
     text-align: center;
+    margin-top: 1rem;
 }
 
 .im_size {
@@ -96,4 +92,8 @@ td {
 
 .jay2 {
     margin-left: 1rem;
+}
+
+.successfull {
+    color: green;
 }

@@ -4,24 +4,31 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import Header from "./Header";
 import "./login.css";
+import { useAlert } from "react-alert";
+
 
 function Login() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    const alert = useAlert();
 
-  const [email, setEmail] = useState("");
+    const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const loginSubmit = (e) => {
         e.preventDefault();
         dispatch(login(email, password));        
     };
      const { error, isAuthenticated } = useSelector((state) => state.user);
-    useEffect(() => {
+  useEffect(() => {
+      if (error) {
+        alert.error(error);
+        dispatch(clearErrors());
+      }
       if (isAuthenticated) {
         navigate('/');
       }
       // eslint-disable-next-line
-    }, [dispatch, isAuthenticated]);
+    }, [dispatch, isAuthenticated,error, alert]);
   return (
     <>
     {/* <Header/> */}

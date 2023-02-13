@@ -27,7 +27,18 @@ const userSchema = new mongoose.Schema({
         type: String,
         default: "user"
     },
-
+    points: {
+        type: Number,
+        default: 0
+    },
+    submitans: {
+        type: Number,
+        default: 0
+    },
+    submitFeedback: {
+        type: Number,
+        default: 0
+    },
     resetPasswordToken: String,
     resetPasswordExpire: Date,
 });

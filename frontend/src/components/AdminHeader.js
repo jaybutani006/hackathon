@@ -1,11 +1,25 @@
 import React from 'react'
+import { useNavigate } from 'react-router-dom'
 import './AdminHeader.css'
 function AdminHeader() {
+  const navigate = useNavigate();
+  const createMenuClick = () => {
+    navigate("/admin/createmenu");
+  }
+  const manageUserClick = () => {
+    navigate("/admin/manageusers");
+  };
+  const logoClick = () => {
+    navigate("/");
+  }
+  const FeedbackClick = () => {
+    navigate("/admin/feedback");
+  };
   return (
     <nav class="navbar navbar-expand-lg  nav_color">
       <div class="container-fluid">
         <h2 class="navbar-brand">
-          <a class="nav-link  f_color" aria-current="page" href="/">
+          <a class="nav-link  f_color" aria-current="page" onClick={logoClick}>
             HungFiller
           </a>
         </h2>
@@ -15,18 +29,24 @@ function AdminHeader() {
               <a
                 class="nav-link  f_color"
                 aria-current="page"
-                href="/admin/createmenu"
+                onClick={createMenuClick}
               >
                 CreateMenu
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link   f_color" href="/admin/manageusers">
+              <a
+                class="nav-link   f_color"
+                onClick={manageUserClick}
+              >
                 ManageUsers
               </a>
             </li>
             <li class="nav-item ">
-              <a class="nav-link   f_color" href="/admin/feedback">
+              <a
+                class="nav-link   f_color"
+                onClick={FeedbackClick}
+              >
                 Feedback
               </a>
             </li>

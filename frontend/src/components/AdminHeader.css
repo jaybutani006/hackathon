@@ -31,4 +31,5 @@ body {
 .f_color {
     color: red;
     font-weight: bold;
+    cursor: pointer;
 }

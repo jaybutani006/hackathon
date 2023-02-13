@@ -11,12 +11,23 @@ exports.createMenu = catchAsyncError(async(req, res, next) => {
         id, { breakfast: breakfast, lunch: lunch, snacks: snacks, dinner: dinner }, {
             new: true,
             runValidators: true,
-            // useFindAndModify: false,
+            useFindAndModify: false,
         }
     );
 
     res.status(200).json({
-        success: true,
+        success: "kuch bhi",
         menu,
+    });
+});
+
+// get menu
+exports.getMenu = catchAsyncError(async(req, res, next) => {
+    //   const feedbacks = await Feedback.find();
+    const menu = await Menu.find();
+
+    res.status(200).json({
+        success: true,
+        menu
     });
 });

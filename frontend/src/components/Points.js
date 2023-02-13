@@ -1,12 +1,25 @@
-import React from 'react'
+import React, { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux';
 import Header from './Header'
+import store from '../store';
 import './Points.css'
+import { loadUser } from '../actions/userAction';
+import { useNavigate } from 'react-router-dom';
 function Points() {
+  const { user } = useSelector((state) => state.user);
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  // useEffect(() => {
+  //   const fun = async () => {
+  //     dispatch(loadUser());
+  //   };
+  //   fun();
+  // }, []);
     return (
       <>
-        <Header />
+        <Header user={user}/>
         <div class="main">
-          <div class="point">Your points : 107 pts</div>
+          <div class="point">Your points : {user.points} pts</div>
           <div class="rewards">Rewards :</div>
           <div class="card1">
             <div class="center">
