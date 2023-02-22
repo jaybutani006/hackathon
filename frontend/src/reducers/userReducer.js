@@ -37,9 +37,46 @@ import {
     GET_ALL_USERS_REQUEST,
     GET_ALL_USERS_SUCCESS,
     GET_ALL_USERS_FAIL,
-    UPDATE_CUSTOMER_REQUEST,
-    UPDATE_CUSTOMER_SUCCESS,
-    UPDATE_CUSTOMER_FAIL,
+    UPDATE_RESPONSE_REQUEST,
+    UPDATE_RESPONSE_SUCCESS,
+    UPDATE_RESPONSE_FAIL,
+    GET_BREAKFAST_USERS_REQUEST,
+    GET_BREAKFAST_USERS_SUCCESS,
+    GET_BREAKFAST_USERS_FAIL,
+    GET_LUNCH_USERS_REQUEST,
+    GET_LUNCH_USERS_SUCCESS,
+    GET_LUNCH_USERS_FAIL,
+    GET_SNACKS_USERS_REQUEST,
+    GET_SNACKS_USERS_SUCCESS,
+    GET_SNACKS_USERS_FAIL,
+    GET_DINNER_USERS_REQUEST,
+    GET_DINNER_USERS_SUCCESS,
+    GET_DINNER_USERS_FAIL,
+    GET_SUBMIT_USERS_REQUEST,
+    GET_SUBMIT_USERS_SUCCESS,
+    GET_SUBMIT_USERS_FAIL,
+    SEARCH_BREAKFAST_USERS_REQUEST,
+    SEARCH_BREAKFAST_USERS_SUCCESS,
+    SEARCH_BREAKFAST_USERS_FAIL,
+    SEARCH_LUNCH_USERS_REQUEST,
+    SEARCH_LUNCH_USERS_SUCCESS,
+    SEARCH_LUNCH_USERS_FAIL,
+    SEARCH_SNACKS_USERS_REQUEST,
+    SEARCH_SNACKS_USERS_SUCCESS,
+    SEARCH_SNACKS_USERS_FAIL,
+    SEARCH_DINNER_USERS_REQUEST,
+    SEARCH_DINNER_USERS_SUCCESS,
+    SEARCH_DINNER_USERS_FAIL,
+    SEARCH_SUBMIT_USERS_REQUEST,
+    SEARCH_SUBMIT_USERS_SUCCESS,
+    SEARCH_SUBMIT_USERS_FAIL,
+    SEARCH_USERS_REQUEST,
+    SEARCH_USERS_SUCCESS,
+    SEARCH_USERS_FAIL,
+    DELETE_USER_REQUEST,
+    DELETE_USER_SUCCESS,
+    DELETE_USER_FAIL,
+    DELETE_USER_RESET,
     CLEAR_ERRORS,
 } from "../constants/userConstants";
 
@@ -80,13 +117,23 @@ export const userReducer = (state = { user: {} }, action) => {
         case UPDATE_POINTS_REQUEST:
         case FEEDBACK_COUNT_REQUEST:
         case ANSWER_COUNT_REQUEST:
+        case UPDATE_RESPONSE_REQUEST:
+        case DELETE_USER_REQUEST:
             return {
                 ...state,
                 loading: true,
             };
+        case DELETE_USER_SUCCESS:
+            return {
+                ...state,
+                loading: false,
+                isDeleted: action.payload.success,
+                message: action.payload.message,
+            };
         case UPDATE_POINTS_SUCCESS:
         case FEEDBACK_COUNT_SUCCESS:
         case ANSWER_COUNT_SUCCESS:
+        case UPDATE_RESPONSE_SUCCESS:
             return {
                 ...state,
                 loading: false,
@@ -95,10 +142,22 @@ export const userReducer = (state = { user: {} }, action) => {
         case UPDATE_POINTS_FAIL:
         case FEEDBACK_COUNT_FAIL:
         case ANSWER_COUNT_FAIL:
+        case UPDATE_RESPONSE_FAIL:
             return {
                 ...state,
                 loading: false,
                 error: action.payload,
+            };
+        case DELETE_USER_FAIL:
+            return {
+                ...state,
+                loading: false,
+                error: action.payload,
+            };
+        case DELETE_USER_RESET:
+            return {
+                ...state,
+                isDeleted: false,
             };
         case LOAD_USER_FAIL:
             return {
@@ -199,10 +258,12 @@ export const menuReducer = (state = { menu: {} }, action) => {
 export const usersReducer = (state = { users: {} }, action) => {
     switch (action.type) {
         case GET_ALL_USERS_REQUEST:
+        case SEARCH_USERS_REQUEST:
             return {
                 loading: true,
             };
         case GET_ALL_USERS_SUCCESS:
+        case SEARCH_USERS_SUCCESS:
             return {
                 ...state,
                 loading: false,
@@ -210,6 +271,7 @@ export const usersReducer = (state = { users: {} }, action) => {
                 users: action.payload,
             };
         case GET_ALL_USERS_FAIL:
+        case SEARCH_USERS_FAIL:
             return {
                 ...state,
                 loading: false,
@@ -228,27 +290,165 @@ export const usersReducer = (state = { users: {} }, action) => {
     }
 };
 
-export const adminReducer = (state = { customers: {} }, action) => {
+export const breakfastUserReducer = (state = { breakfastUsers: {} }, action) => {
     switch (action.type) {
-        case UPDATE_CUSTOMER_REQUEST:
+        case GET_BREAKFAST_USERS_REQUEST:
+        case SEARCH_BREAKFAST_USERS_REQUEST:
             return {
                 loading: true,
             };
-        case UPDATE_CUSTOMER_SUCCESS:
+        case GET_BREAKFAST_USERS_SUCCESS:
+        case SEARCH_BREAKFAST_USERS_SUCCESS:
             return {
                 ...state,
                 loading: false,
-                success: true,
-                customers: action.payload,
-            };
-        case UPDATE_CUSTOMER_FAIL:
-            return {
-                ...state,
-                loading: false,
-                customers: null,
-                error: action.payload,
+                breakfastUsers: action.payload,
             };
 
+        case GET_BREAKFAST_USERS_FAIL:
+        case SEARCH_BREAKFAST_USERS_FAIL:
+            return {
+                ...state,
+                loading: false,
+                breakfastUsers: null,
+                error: action.payload,
+            };
+        case CLEAR_ERRORS:
+            return {
+                ...state,
+                error: null,
+            };
+
+        default:
+            return state;
+    }
+};
+
+export const lunchUserReducer = (state = { lunchUsers: {} }, action) => {
+    switch (action.type) {
+        case GET_LUNCH_USERS_REQUEST:
+        case SEARCH_LUNCH_USERS_REQUEST:
+            return {
+                loading: true,
+            };
+        case GET_LUNCH_USERS_SUCCESS:
+        case SEARCH_LUNCH_USERS_SUCCESS:
+            return {
+                ...state,
+                loading: false,
+                lunchUsers: action.payload,
+            };
+
+        case GET_LUNCH_USERS_FAIL:
+        case SEARCH_LUNCH_USERS_FAIL:
+            return {
+                ...state,
+                loading: false,
+                lunchUsers: null,
+                error: action.payload,
+            };
+        case CLEAR_ERRORS:
+            return {
+                ...state,
+                error: null,
+            };
+
+        default:
+            return state;
+    }
+};
+
+export const snacksUserReducer = (state = { snacksUsers: {} }, action) => {
+    switch (action.type) {
+        case GET_SNACKS_USERS_REQUEST:
+        case SEARCH_SNACKS_USERS_REQUEST:
+            return {
+                loading: true,
+            };
+        case GET_SNACKS_USERS_SUCCESS:
+        case SEARCH_SNACKS_USERS_SUCCESS:
+            return {
+                ...state,
+                loading: false,
+                snacksUsers: action.payload,
+            };
+
+        case GET_SNACKS_USERS_FAIL:
+        case SEARCH_SNACKS_USERS_FAIL:
+            return {
+                ...state,
+                loading: false,
+                snacksUsers: null,
+                error: action.payload,
+            };
+        case CLEAR_ERRORS:
+            return {
+                ...state,
+                error: null,
+            };
+
+        default:
+            return state;
+    }
+};
+
+export const dinnerUserReducer = (state = { dinnerUsers: {} }, action) => {
+    switch (action.type) {
+        case GET_DINNER_USERS_REQUEST:
+        case SEARCH_DINNER_USERS_REQUEST:
+            return {
+                loading: true,
+            };
+        case GET_DINNER_USERS_SUCCESS:
+        case SEARCH_DINNER_USERS_SUCCESS:
+            return {
+                ...state,
+                loading: false,
+                dinnerUsers: action.payload,
+            };
+
+        case GET_DINNER_USERS_FAIL:
+        case SEARCH_DINNER_USERS_FAIL:
+            return {
+                ...state,
+                loading: false,
+                dinnerUsers: null,
+                error: action.payload,
+            };
+        case CLEAR_ERRORS:
+            return {
+                ...state,
+                error: null,
+            };
+
+        default:
+            return state;
+    }
+};
+
+export const submitUserReducer = (state = { submitUsers: {} }, action) => {
+    switch (action.type) {
+        case GET_SUBMIT_USERS_REQUEST:
+        case SEARCH_SUBMIT_USERS_REQUEST:
+            return {
+                loading: true,
+            };
+        case GET_SUBMIT_USERS_SUCCESS:
+        case SEARCH_SUBMIT_USERS_SUCCESS:
+            return {
+                ...state,
+                loading: false,
+                submitUsers: action.payload,
+            };
+
+        case GET_SUBMIT_USERS_FAIL:
+        case SEARCH_SUBMIT_USERS_FAIL:
+            return {
+                ...state,
+                loading: false,
+                submitUsers: null,
+                error: action.payload,
+            };
         case CLEAR_ERRORS:
             return {
                 ...state,

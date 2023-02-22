@@ -3,7 +3,6 @@ const app = require("./app");
 const cloudinary = require('cloudinary');
 const connectDatabase = require("./config/database");
 const cron = require('node-cron');
-const moment = require('moment')
 const User = require('./models/userModel')
     // handling uncaught exeption
 
@@ -47,7 +46,14 @@ process.on("unhandledRejection", err => {
 //     console.log("called every 5 second", moment().format('DD MMM YYYY hh:mm:ss'));
 // })
 cron.schedule("34 14 * * *", async() => {
-    await User.updateMany({}, { submitans: 0, submitFeedback: 0 });
+    await User.updateMany({}, {
+        submitans: 0,
+        submitFeedback: 0,
+        breakfastYes: 0,
+        lunchYes: 0,
+        snacksYes: 0,
+        dinnerYes: 0,
+    });
     console.log("Daily submit value reseted");
 }, {
     timezone: 'Asia/Kolkata'

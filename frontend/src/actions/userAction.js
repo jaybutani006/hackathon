@@ -37,10 +37,46 @@ import {
     GET_ALL_USERS_REQUEST,
     GET_ALL_USERS_SUCCESS,
     GET_ALL_USERS_FAIL,
+    UPDATE_RESPONSE_REQUEST,
+    UPDATE_RESPONSE_SUCCESS,
+    UPDATE_RESPONSE_FAIL,
+    GET_BREAKFAST_USERS_REQUEST,
+    GET_BREAKFAST_USERS_SUCCESS,
+    GET_BREAKFAST_USERS_FAIL,
+    GET_LUNCH_USERS_REQUEST,
+    GET_LUNCH_USERS_SUCCESS,
+    GET_LUNCH_USERS_FAIL,
+    GET_SNACKS_USERS_REQUEST,
+    GET_SNACKS_USERS_SUCCESS,
+    GET_SNACKS_USERS_FAIL,
+    GET_DINNER_USERS_REQUEST,
+    GET_DINNER_USERS_SUCCESS,
+    GET_DINNER_USERS_FAIL,
+    GET_SUBMIT_USERS_REQUEST,
+    GET_SUBMIT_USERS_SUCCESS,
+    GET_SUBMIT_USERS_FAIL,
+    SEARCH_BREAKFAST_USERS_REQUEST,
+    SEARCH_BREAKFAST_USERS_SUCCESS,
+    SEARCH_BREAKFAST_USERS_FAIL,
+    SEARCH_LUNCH_USERS_REQUEST,
+    SEARCH_LUNCH_USERS_SUCCESS,
+    SEARCH_LUNCH_USERS_FAIL,
+    SEARCH_SNACKS_USERS_REQUEST,
+    SEARCH_SNACKS_USERS_SUCCESS,
+    SEARCH_SNACKS_USERS_FAIL,
+    SEARCH_DINNER_USERS_REQUEST,
+    SEARCH_DINNER_USERS_SUCCESS,
+    SEARCH_DINNER_USERS_FAIL,
+    SEARCH_USERS_REQUEST,
+    SEARCH_USERS_SUCCESS,
+    SEARCH_USERS_FAIL,
+    SEARCH_SUBMIT_USERS_REQUEST,
+    SEARCH_SUBMIT_USERS_SUCCESS,
+    SEARCH_SUBMIT_USERS_FAIL,
     CLEAR_ERRORS,
-    UPDATE_CUSTOMER_REQUEST,
-    UPDATE_CUSTOMER_SUCCESS,
-    UPDATE_CUSTOMER_FAIL,
+    DELETE_USER_REQUEST,
+    DELETE_USER_SUCCESS,
+    DELETE_USER_FAIL,
 } from "../constants/userConstants";
 import axios from "axios";
 
@@ -102,7 +138,28 @@ export const createFeedback = (comment, ratings) => async(dispatch) => {
     }
 };
 
-// create feedback
+// update response
+export const updateResponse =
+    (breakfastYes, lunchYes, snacksYes, dinnerYes, id) => async(dispatch) => {
+        try {
+            dispatch({ type: UPDATE_RESPONSE_REQUEST });
+
+            const config = { headers: { "Content-Type": "multipart/form-data" } };
+
+            const { data } = await axios.put(
+                `/api/v1/giveans`, { breakfastYes, lunchYes, snacksYes, dinnerYes, id },
+                config
+            );
+            dispatch({ type: UPDATE_RESPONSE_SUCCESS, payload: data.user });
+        } catch (error) {
+            dispatch({
+                type: UPDATE_RESPONSE_FAIL,
+                payload: error.response.data.error,
+            });
+        }
+    };
+
+// update menu
 export const createMenu = (breakfast, lunch, snacks, dinner, id) => async(dispatch) => {
     try {
         dispatch({ type: CREATE_MENU_REQUEST });
@@ -122,7 +179,7 @@ export const createMenu = (breakfast, lunch, snacks, dinner, id) => async(dispat
     }
 };
 
-// create feedback
+// get all feedback
 export const getAllFeedbacks = () => async(dispatch) => {
     try {
         dispatch({ type: GET_FEEDBACK_REQUEST });
@@ -139,7 +196,188 @@ export const getAllFeedbacks = () => async(dispatch) => {
     }
 };
 
-// // Load User
+// get breakfast users
+export const getBreakfastUsers = () => async(dispatch) => {
+    try {
+        dispatch({ type: GET_BREAKFAST_USERS_REQUEST });
+
+        const { data } = await axios.get(
+            `/api/v1/breakfast/users`
+        );
+        dispatch({ type: GET_BREAKFAST_USERS_SUCCESS, payload: data.users });
+    } catch (error) {
+        dispatch({
+            type: GET_BREAKFAST_USERS_FAIL,
+            payload: error.response.data.error,
+        });
+    }
+};
+
+// search breakfast users
+export const searchBreakfastUsers = (key) => async(dispatch) => {
+    try {
+        dispatch({ type: SEARCH_BREAKFAST_USERS_REQUEST });
+
+        const { data } = await axios.get(
+            `/api/v1/breakfast/users/${key}`
+        );
+        dispatch({ type: SEARCH_BREAKFAST_USERS_SUCCESS, payload: data.users });
+    } catch (error) {
+        dispatch({
+            type: SEARCH_BREAKFAST_USERS_FAIL,
+            payload: error.response.data.error,
+        });
+    }
+};
+
+// get lunch users
+export const getLunchUsers = () => async(dispatch) => {
+    try {
+        dispatch({ type: GET_LUNCH_USERS_REQUEST });
+
+        const { data } = await axios.get(
+            `/api/v1/lunch/users`
+        );
+        dispatch({ type: GET_LUNCH_USERS_SUCCESS, payload: data.users });
+    } catch (error) {
+        dispatch({
+            type: GET_LUNCH_USERS_FAIL,
+            payload: error.response.data.error,
+        });
+    }
+};
+// search lunch users
+export const searchLunchfastUsers = (key) => async(dispatch) => {
+    try {
+        dispatch({ type: SEARCH_LUNCH_USERS_REQUEST });
+
+        const { data } = await axios.get(
+            `/api/v1/lunch/users/${key}`
+        );
+        dispatch({ type: SEARCH_LUNCH_USERS_SUCCESS, payload: data.users });
+    } catch (error) {
+        dispatch({
+            type: SEARCH_LUNCH_USERS_FAIL,
+            payload: error.response.data.error,
+        });
+    }
+};
+// search submit users
+export const searchSubmitUsers = (key) => async(dispatch) => {
+    try {
+        dispatch({ type: SEARCH_SUBMIT_USERS_REQUEST });
+
+        const { data } = await axios.get(
+            `/api/v1/submit/users/${key}`
+        );
+        dispatch({ type: SEARCH_SUBMIT_USERS_SUCCESS, payload: data.users });
+    } catch (error) {
+        dispatch({
+            type: SEARCH_SUBMIT_USERS_FAIL,
+            payload: error.response.data.error,
+        });
+    }
+};
+// get snacks users
+export const getSnacksUsers = () => async(dispatch) => {
+    try {
+        dispatch({ type: GET_SNACKS_USERS_REQUEST });
+
+        const { data } = await axios.get(
+            `/api/v1/snacks/users`
+        );
+        dispatch({ type: GET_SNACKS_USERS_SUCCESS, payload: data.users });
+    } catch (error) {
+        dispatch({
+            type: GET_SNACKS_USERS_FAIL,
+            payload: error.response.data.error,
+        });
+    }
+};
+// get snacks users
+export const deleteUser = (id) => async(dispatch) => {
+    try {
+        dispatch({ type: DELETE_USER_REQUEST });
+
+        const { data } = await axios.delete(
+            `/api/v1/user/delete/${id}`
+        );
+        dispatch({ type: DELETE_USER_SUCCESS, payload: data });
+    } catch (error) {
+        dispatch({
+            type: DELETE_USER_FAIL,
+            payload: error.response.data,
+        });
+    }
+};
+
+// search snacks users
+export const searchSnacksUsers = (key) => async(dispatch) => {
+    try {
+        dispatch({ type: SEARCH_SNACKS_USERS_REQUEST });
+
+        const { data } = await axios.get(
+            `/api/v1/snacks/users/${key}`
+        );
+        dispatch({ type: SEARCH_SNACKS_USERS_SUCCESS, payload: data.users });
+    } catch (error) {
+        dispatch({
+            type: SEARCH_SNACKS_USERS_FAIL,
+            payload: error.response.data.error,
+        });
+    }
+};
+// get dinner users
+export const getDinnerUsers = () => async(dispatch) => {
+    try {
+        dispatch({ type: GET_DINNER_USERS_REQUEST });
+
+        const { data } = await axios.get(
+            `/api/v1/dinner/users`
+        );
+        dispatch({ type: GET_DINNER_USERS_SUCCESS, payload: data.users });
+    } catch (error) {
+        dispatch({
+            type: GET_DINNER_USERS_FAIL,
+            payload: error.response.data.error,
+        });
+    }
+};
+
+// search dinner users
+export const searchDinnerUsers = (key) => async(dispatch) => {
+    try {
+        dispatch({ type: SEARCH_DINNER_USERS_REQUEST });
+
+        const { data } = await axios.get(
+            `/api/v1/dinner/users/${key}`
+        );
+        dispatch({ type: SEARCH_DINNER_USERS_SUCCESS, payload: data.users });
+    } catch (error) {
+        dispatch({
+            type: SEARCH_DINNER_USERS_FAIL,
+            payload: error.response.data.error,
+        });
+    }
+};
+// get submit users
+export const getSubmitUsers = () => async(dispatch) => {
+    try {
+        dispatch({ type: GET_SUBMIT_USERS_REQUEST });
+
+        const { data } = await axios.get(
+            `/api/v1/submit/users`
+        );
+        dispatch({ type: GET_SUBMIT_USERS_SUCCESS, payload: data.users });
+    } catch (error) {
+        dispatch({
+            type: GET_SUBMIT_USERS_FAIL,
+            payload: error.response.data.error,
+        });
+    }
+};
+
+// Load User
 export const loadUser = () => async(dispatch) => {
     try {
         dispatch({ type: LOAD_USER_REQUEST });
@@ -182,7 +420,7 @@ export const updatePoints = (id, points) => async(dispatch) => {
     }
 };
 
-// update points
+// get menu
 export const getMenu = () => async(dispatch) => {
     try {
         dispatch({ type: GET_MENU_REQUEST });
@@ -196,7 +434,7 @@ export const getMenu = () => async(dispatch) => {
     }
 };
 
-// update points
+// get all points
 export const getusers = () => async(dispatch) => {
     try {
         dispatch({ type: GET_ALL_USERS_REQUEST });
@@ -209,7 +447,22 @@ export const getusers = () => async(dispatch) => {
         });
     }
 };
+// get dinner users
+export const searchUsers = (key) => async(dispatch) => {
+    try {
+        dispatch({ type: SEARCH_USERS_REQUEST });
 
+        const { data } = await axios.get(
+            `/api/v1/users/${key}`
+        );
+        dispatch({ type: SEARCH_USERS_SUCCESS, payload: data.users });
+    } catch (error) {
+        dispatch({
+            type: SEARCH_USERS_FAIL,
+            payload: error.response.data.error,
+        });
+    }
+};
 // update feedback count
 export const updateFeedbackCount = (id) => async(dispatch) => {
     try {
@@ -240,28 +493,6 @@ export const updateAnswerCount = (id) => async(dispatch) => {
     } catch (error) {
         dispatch({
             type: ANSWER_COUNT_FAIL,
-            payload: error.response.data.error,
-        });
-    }
-};
-
-// update customer count
-export const updateCustomers = (userId, userName) => async(dispatch) => {
-    try {
-        dispatch({ type: UPDATE_CUSTOMER_REQUEST });
-        const config = { headers: { "Content-Type": "multipart/form-data" } };
-
-        const { data } = await axios.post(
-            `/api/v1/customers`, { userId, userName },
-            config
-        );
-        dispatch({
-            type: UPDATE_CUSTOMER_SUCCESS,
-            payload: data.customers,
-        });
-    } catch (error) {
-        dispatch({
-            type: UPDATE_CUSTOMER_FAIL,
             payload: error.response.data.error,
         });
     }

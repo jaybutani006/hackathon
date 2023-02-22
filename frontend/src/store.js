@@ -9,7 +9,12 @@ import {
     menuReducer,
     callReducer,
     usersReducer,
-    adminReducer
+    adminReducer,
+    submitUserReducer,
+    breakfastUserReducer,
+    lunchUserReducer,
+    snacksUserReducer,
+    dinnerUserReducer
 } from "./reducers/userReducer";
 
 const reducer = combineReducers({
@@ -18,7 +23,11 @@ const reducer = combineReducers({
     menu: menuReducer,
     call: callReducer,
     users: usersReducer,
-    customers: adminReducer
+    submitUsers: submitUserReducer,
+    breakfastUsers: breakfastUserReducer,
+    lunchUsers: lunchUserReducer,
+    snacksUsers: snacksUserReducer,
+    dinnerUsers: dinnerUserReducer
 });
 
 let initialState = {};

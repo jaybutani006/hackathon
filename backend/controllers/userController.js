@@ -1,5 +1,4 @@
 const User = require("../models/userModel");
-const Admin = require("../models/adminModel");
 const ErrorHandler = require("../utils/errorHandler");
 const catchAsyncError = require("../middleware/catchAsyncError");
 const sendToken = require("../utils/jwtToken");
@@ -72,6 +71,19 @@ exports.logout = catchAsyncError(async(req, res, next) => {
     })
 })
 
+// delete user by id
+exports.deleteUser = catchAsyncError(async(req, res, next) => {
+    console.log(req.params.id);
+    const user = await User.findByIdAndDelete(
+        req.params.id
+    );
+    res.status(200).json({
+        message: "User deleted successfully",
+        success: true,
+        user
+    });
+});
+
 // update points
 exports.updatePoints = catchAsyncError(async(req, res, next) => {
     const user = await User.findByIdAndUpdate(
@@ -85,6 +97,161 @@ exports.updatePoints = catchAsyncError(async(req, res, next) => {
         success: true,
     });
 })
+
+// update breakfast yes or no
+exports.updateAns = catchAsyncError(async(req, res, next) => {
+    const user = await User.findByIdAndUpdate(
+        req.body.id, {
+            breakfastYes: req.body.breakfastYes,
+            lunchYes: req.body.lunchYes,
+            snacksYes: req.body.snacksYes,
+            dinnerYes: req.body.dinnerYes,
+        }, { new: true, runValidators: true, useFindAndModify: false }
+    );
+    res.status(200).json({
+        user,
+        success: true,
+    });
+})
+
+// get all user who yes for breakfast
+exports.getUserBreakfastYes = catchAsyncError(async(req, res, next) => {
+    const users = await User.find({ breakfastYes: 1 });
+
+    res.status(200).json({
+        success: true,
+        users,
+    });
+});
+
+// get all user who yes for lunch
+exports.getUserLunchYes = catchAsyncError(async(req, res, next) => {
+    const users = await User.find({ lunchYes: 1 });
+
+    res.status(200).json({
+        success: true,
+        users,
+    });
+});
+
+// get all user who yes for snacks
+exports.getUserSnacksYes = catchAsyncError(async(req, res, next) => {
+    const users = await User.find({ snacksYes: 1 });
+
+    res.status(200).json({
+        success: true,
+        users,
+    });
+});
+
+// get all user who yes for dinner
+exports.getUserDinnerYes = catchAsyncError(async(req, res, next) => {
+    const users = await User.find({ dinnerYes: 1 });
+
+    res.status(200).json({
+        success: true,
+        users,
+    });
+});
+
+// get all user who submit for ans
+exports.getUserSubmit = catchAsyncError(async(req, res, next) => {
+    const users = await User.find({ submitans: 1 });
+
+    res.status(200).json({
+        success: true,
+        users,
+    });
+});
+
+// get search in breakfast users
+exports.searchBreakfastUsers = catchAsyncError(async(req, res, next) => {
+    const users = await User.find({
+        $and: [{ breakfastYes: 1 }],
+        $or: [
+            { rollNumber: { $regex: req.params.key, $options: "xi" } },
+            { email: { $regex: req.params.key, $options: "xi" } },
+        ],
+    });
+    res.status(200).json({
+        success: true,
+        users,
+    });
+});
+
+// get search in lunch users
+exports.searchLunchUsers = catchAsyncError(async(req, res, next) => {
+    const users = await User.find({
+        $and: [{ lunchYes: 1 }],
+        $or: [
+            { rollNumber: { $regex: req.params.key, $options: "xi" } },
+            { email: { $regex: req.params.key, $options: "xi" } },
+        ],
+    });
+    res.status(200).json({
+        success: true,
+        users,
+    });
+});
+
+// get search in snacks users
+exports.searchSnacksUsers = catchAsyncError(async(req, res, next) => {
+    const users = await User.find({
+        $and: [{ snacksYes: 1 }],
+        $or: [
+            { rollNumber: { $regex: req.params.key, $options: "xi" } },
+            { email: { $regex: req.params.key, $options: "xi" } },
+        ],
+    });
+    res.status(200).json({
+        success: true,
+        users,
+    });
+});
+
+// get search in dinner users
+exports.searchDinnerUsers = catchAsyncError(async(req, res, next) => {
+    const users = await User.find({
+        $and: [{ dinnerYes: 1 }],
+        $or: [
+            { rollNumber: { $regex: req.params.key, $options: "xi" } },
+            { email: { $regex: req.params.key, $options: "xi" } },
+        ],
+    });
+    res.status(200).json({
+        success: true,
+        users,
+    });
+});
+
+// get search in dinner users
+exports.searchSubmitUsers = catchAsyncError(async(req, res, next) => {
+    const users = await User.find({
+        $and: [{ submitans: 1 }],
+        $or: [
+            { rollNumber: { $regex: req.params.key, $options: "xi" } },
+            { email: { $regex: req.params.key, $options: "xi" } },
+        ],
+    });
+    res.status(200).json({
+        success: true,
+        users,
+    });
+});
+
+// get search in dinner users
+exports.searchUsers = catchAsyncError(async(req, res, next) => {
+    const users = await User.find({
+        $or: [
+            { rollNumber: { $regex: req.params.key, $options: "xi" } },
+            { email: { $regex: req.params.key, $options: "xi" } },
+        ],
+    });
+    res.status(200).json({
+        success: true,
+        users,
+    });
+});
 
 // update feedback given
 exports.dailyOneFeedback = catchAsyncError(async(req, res, next) => {
@@ -127,17 +294,6 @@ exports.dailyOneAnswer = catchAsyncError(async(req, res, next) => {
 //         success: true,
 //     });
 // })
-
-// update customers
-exports.updateCustomers = catchAsyncError(async(req, res, next) => {
-    const { userid, rollNumber, userEmail } = req.body;
-    const customer = await Admin.create(userid, rollNumber, userEmail);
-
-    res.status(200).json({
-        success: true,
-        customer,
-    });
-});
 
 
 const accountSid = "AC9fa39578a042f6a684b182016fd67999";

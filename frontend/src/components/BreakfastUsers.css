@@ -1,0 +1,26 @@
+.tb {
+    max-width: 90vw;
+    margin: auto;
+    margin-top: 2rem;
+}
+
+.getUsers {
+    min-height: 80vh;
+}
+
+.classh1 {
+    margin-top: 2rem;
+}
+
+.input-box-search {
+    width: 371px;
+    padding: 0px 10px;
+    height: 32px;
+    border: 1px solid #935112;
+}
+
+.search-bar {
+    display: flex;
+    justify-content: center;
+    margin: 15px 0px;
+}

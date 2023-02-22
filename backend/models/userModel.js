@@ -39,6 +39,22 @@ const userSchema = new mongoose.Schema({
         type: Number,
         default: 0
     },
+    breakfastYes: {
+        type: Number,
+        default: 0
+    },
+    lunchYes: {
+        type: Number,
+        default: 0
+    },
+    snacksYes: {
+        type: Number,
+        default: 0
+    },
+    dinnerYes: {
+        type: Number,
+        default: 0
+    },
     resetPasswordToken: String,
     resetPasswordExpire: Date,
 });

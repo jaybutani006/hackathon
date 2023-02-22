@@ -1,0 +1,9 @@
+.tb {
+    max-width: 90vw;
+    margin: auto;
+    margin-top: 2rem;
+}
+
+.getUsers {
+    min-height: 80vh;
+}
